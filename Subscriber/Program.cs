@@ -11,6 +11,11 @@ namespace Subscriber
         static void Main(string[] args)
         {
             var client = new MqttClient("127.0.0.1");
+            // https://m2mqtt.wordpress.com/using-mqttclient/
+            // Username and password for client authentication (default values are null, no authentication);
+            // Will message feature (default values provides NO Will message);
+            // Clean session for removing subscriptions on disconnection (default value is true);
+            // Keep Alive period for keeping alive connection with ping message (default value is 60 seconds);
             client.Connect(Guid.NewGuid().ToString());
             client.Subscribe(new string[] { "/hello" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
             client.MqttMsgPublishReceived += client_PublishArrived;
